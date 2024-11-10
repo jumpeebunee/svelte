@@ -1,6 +1,6 @@
 <script lang="ts">
   import Timer from "./components/Timer/Timer.svelte";
-import Todos from "./components/Todos.svelte";
+  import Todos from "./components/Todos.svelte";
 
     let count = $state(0);
 </script>

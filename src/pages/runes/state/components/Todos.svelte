@@ -1,16 +1,27 @@
 <script lang="ts">
     let title = $state('');
 
-    const todos = $state([{title: "add more todos", done: false}]);
+    let updated = $state(true);
+    let todos = $state.raw([{title: "add more todos", done: false}])
 
-    const addTodo = (title: string) => {
-        todos.push({title, done: false});
+    const addTodo = (text: string) => {
+        updated = false;
+        todos.push({title: text, done: false});
         title = "";
+    }
+
+    const updateArray = () => {
+        updated = true;
+        todos = [...todos];
     }
 </script>
 
 <input bind:value={title} type="text" placeholder="todo name">
-<button disabled={!title} onclick={() => addTodo(title)}>add</button>
+
+<div class="buttons">
+    <button disabled={!title} onclick={() => addTodo(title)}>add</button>
+    <button disabled={updated} onclick={updateArray}>update array</button>
+</div>
 
 <div class="todos">
     {#each todos as todo}
