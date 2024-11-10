@@ -14,6 +14,11 @@
         updated = true;
         todos = [...todos];
     }
+
+    const getSnapshot = () => {
+        const x = $state.snapshot(todos);
+        console.log(x)
+    }
 </script>
 
 <input bind:value={title} type="text" placeholder="todo name">
@@ -21,6 +26,7 @@
 <div class="buttons">
     <button disabled={!title} onclick={() => addTodo(title)}>add</button>
     <button disabled={updated} onclick={updateArray}>update array</button>
+    <button onclick={getSnapshot}>get snapshot</button>
 </div>
 
 <div class="todos">
