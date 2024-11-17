@@ -1,5 +1,11 @@
 <script lang="ts">
-    const {title}: {title: string} = $props();
+    type Props = {
+        title: string;
+        description?: string;
+    }
+
+    let { title, description = "No description" }: Props = $props();
 </script>
 
 <h1>{title}</h1>
+<p>{description}</p>
