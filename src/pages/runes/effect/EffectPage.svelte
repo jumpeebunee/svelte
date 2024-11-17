@@ -33,6 +33,20 @@
 
         window.scrollTo(0, div.scrollHeight);
     })
+
+    $effect.root(() => {
+        $effect(() => {
+            count
+        })
+
+        $effect(() => {
+            ms
+        })
+
+        return () => {
+            console.log('clean')
+        }
+    })
 </script>
 
 <h1>{count}</h1>
