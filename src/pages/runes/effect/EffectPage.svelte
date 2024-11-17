@@ -3,6 +3,19 @@
     let ms = $state(1000);
     let div: HTMLDivElement | undefined = undefined;
 
+    let hasScroll = $state(true);
+
+    const seconds = $derived(() => {
+        console.log(`update in seconds: ${$effect.tracking()}`)
+
+        return Math.floor(ms / 1000);
+    })
+
+    const updateScrollState = () => {
+        console.log(`update in scroll: ${$effect.tracking()}`)
+        hasScroll = !hasScroll;
+    }
+
     $effect(() => {
         const timer = setInterval(() => {
             count += 1;
@@ -16,15 +29,18 @@
     $effect.pre(() => {
         count
 
-        if (!div) return;
+        if (!div || !hasScroll) return;
 
         window.scrollTo(0, div.scrollHeight);
     })
 </script>
 
 <h1>{count}</h1>
+<p>Per {seconds()} seconds, has scroll {hasScroll}</p>
 <button onclick={() => (ms *= 2)}>slower</button>
 <button onclick={() => (ms /= 2)}>faster</button>
+
+<button onclick={updateScrollState}>update scroll state</button>
 
 <div bind:this={div} class="items">
     {#each new Array(count) as _, i}
